@@ -1,4 +1,7 @@
 from tkinter import*
+from typing import Generator
+import qrcode
+from PIL import Image, ImageTk
 from tkinter.font import BOLD
 window=Tk()
 
@@ -10,13 +13,20 @@ window.resizable(False,False)
 # delartion of variable
 var_link=StringVar()
 
+
+# qr_generated function definition
 def qr_generated():
     if var_link.get()=='':
             msg='Please give the link !!'
             lbl_msg.config(text=msg,fg='red')
     else:
-            msg='Qr generated sucessfully !!'
-            lbl_msg.config(text=msg,fg='green')
+        # updating qr code Generator
+        qr=(f"link or message:{var_link.get()}")
+        qr_code_generated=qrcode.make(qr)
+        im=ImageTk.PhotoImage(qr_code_generated)
+
+        msg='Qr generated sucessfully !!'
+        lbl_msg.config(text=msg,fg='green')
         
 
 
@@ -60,7 +70,6 @@ qr_title=Label(qr_frame,text="             Qr Code Box          ",font=('times n
 fg='white').place(x=550,y=100)
 qr_code=Label(qr_frame,text='No Qr\n Available',
 font=('Arial',20),fg='white',bg='#62A586').place(x=615,y=215,width=180,height=180)
-
 
 
 
