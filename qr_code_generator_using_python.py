@@ -1,8 +1,9 @@
 from tkinter import*
 from typing import Generator
 import qrcode
-from PIL import Image, ImageTk
+from PIL import ImageTk,Image
 from tkinter.font import BOLD
+from resizeimage import resizeimage
 window=Tk()
 
 # set geometry and title
@@ -14,6 +15,14 @@ window.resizable(False,False)
 var_link=StringVar()
 
 
+# function of clear
+def clear():
+    var_link.set('')
+    msg=''
+    lbl_msg.config(text=msg)
+
+
+
 # qr_generated function definition
 def qr_generated():
     if var_link.get()=='':
@@ -23,8 +32,11 @@ def qr_generated():
         # updating qr code Generator
         qr=(f"link or message:{var_link.get()}")
         qr_code_generated=qrcode.make(qr)
-        im=ImageTk.PhotoImage(qr_code_generated)
-
+        qr_code_generated=resizeimage.resize_cover(qr_code_generated,[180,180])
+        qr_code_generated.save("D:\python\project\QR Code Generator using Python\qr_code_generator_using_python.py"+str(var_link.get())+'.png')
+        # im=ImageTk.PhotoImage(file="D:\python\project\QR Code Generator using Python\qr_code_generator_using_python.py"+str(var_link.get())+'.png')
+        # qr_code=Label(qr_frame,image=im).place(x=615,y=215)
+        
         msg='Qr generated sucessfully !!'
         lbl_msg.config(text=msg,fg='green')
         
@@ -53,7 +65,7 @@ font=('times new roman',20,BOLD),fg='white',
 bg='#0096B4',command=qr_generated).place(x=130,y=300,width=160,height=50)
 
 clear_button=Button(message_frame,text='clear',
-font=('times new roman',20,BOLD),fg='white',bg='#69855D').place(x=300,y=300,width=130,height=50)
+font=('times new roman',20,BOLD),fg='white',bg='#69855D',command=clear).place(x=300,y=300,width=130,height=50)
 
 # write message on screen when qr code generated or not
 msg='Qr generated sucessfully !!'
@@ -70,7 +82,6 @@ qr_title=Label(qr_frame,text="             Qr Code Box          ",font=('times n
 fg='white').place(x=550,y=100)
 qr_code=Label(qr_frame,text='No Qr\n Available',
 font=('Arial',20),fg='white',bg='#62A586').place(x=615,y=215,width=180,height=180)
-
 
 
 
