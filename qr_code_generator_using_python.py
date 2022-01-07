@@ -36,7 +36,10 @@ def showcode():
     subLabel.config(text="QR of " + var_link.get())
 
 def clear():
-    pass
+    var_link.set('')
+    msg=''
+
+
 
 
 link_title=Label(window,text="  Link  ",font=('Arial',30,BOLD))
