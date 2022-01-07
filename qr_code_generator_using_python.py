@@ -10,15 +10,13 @@ import os
 
 window=Tk()
 
-# set geometry and title
-# window.geometry("900x500+300+50")
+# set title of gui
 window.title('Qr Code Generator')
-# window.resizable(False,False)
 
 # delartion of variable
 var_link=StringVar()
 
-
+# function of qr generator
 def qr_generator():
     if len(var_link.get())!=0:
         global qr , photo
@@ -35,11 +33,11 @@ def showcode():
     imageLabel.config(image = photo)
     subLabel.config(text="QR of " + var_link.get())
 
+
+# clear function definition
 def clear():
     var_link.set('')
     msg=''
-
-
 
 
 link_title=Label(window,text="  Link  ",font=('Arial',30,BOLD))
@@ -61,7 +59,6 @@ imageLabel.grid(row=2,column=1)
 
 subLabel=Label(window)
 subLabel.grid(row=3,column=1)
-
 
 
 
