@@ -26,6 +26,14 @@ def qr_generator():
         photo=BitmapImage(data=qr.xbm(scale=8))
     else:
         messagebox.showinfo("qr code generator" ,message="please enter the link")
+    try:
+        showcode()
+    except:
+        pass
+
+def showcode():
+    imageLabel.config(image = photo)
+    subLabel.config(text="QR of " + var_link.get())
 
 def clear():
     pass
@@ -44,6 +52,12 @@ qr_button.grid(row=0,column=2)
 clear_button=Button(window,text='Clear',font=('Times in roman',20,BOLD),
 fg='white',bg='#6D6D15',command=clear)
 clear_button.grid(row=1,column=2)
+
+imageLabel=Label(window)
+imageLabel.grid(row=2,column=1)
+
+subLabel=Label(window)
+subLabel.grid(row=3,column=1)
 
 
 
